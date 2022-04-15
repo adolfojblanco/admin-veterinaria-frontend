@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { Alerta } from "../components/ui/Alerta";
+import { clienteAxios } from "../config/axios";
 
 export const Registrar = () => {
   const [alerta, setAlerta] = useState({});
@@ -20,7 +22,7 @@ export const Registrar = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if ([nombre, email, password, confirmar].includes("")) {
       setAlerta({ msg: "Hay campos vacios", error: true });
@@ -41,6 +43,13 @@ export const Registrar = () => {
     }
 
     setAlerta({});
+    try {
+      const url = `/veterinarios/registrar`;
+      await clienteAxios.post(url, veterinario);
+      setAlerta({ msg: "Creado Correctamente", error: false });
+    } catch (error) {
+      setAlerta({ msg: error.response.data.msg, error: true });
+    }
   };
 
   return (

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export const Alerta = ({ alerta }) => {
+
+
   return (
     <div
       className={`${
