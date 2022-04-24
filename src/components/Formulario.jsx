@@ -6,11 +6,11 @@ export const Formulario = () => {
   const { guardarPaciente, paciente } = usePacientes();
   const [alerta, setAlerta] = useState({});
   const [mascota, setMascota] = useState({
-    nombre: "",
-    propietario: "",
-    email: "",
+    nombre: "Adolfo B",
+    propietario: "Adolfo",
+    email: "tets@trest.com",
     fecha: Date.now(),
-    sintomas: "",
+    sintomas: "DOlor",
   });
 
   useEffect(() => {

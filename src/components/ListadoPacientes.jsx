@@ -4,7 +4,6 @@ import { Paciente } from "./Paciente";
 
 export const ListadoPacientes = () => {
   const { pacientes } = usePacientes();
-
   return (
     <>
       {pacientes.length ? (
@@ -15,12 +14,10 @@ export const ListadoPacientes = () => {
           </h2>
           <p className="text-xl mt-5 mb-10 text-center">
             Administra tus pacientes{" "}
-            <span className="primary_color font-bold">
-              {" "}
-              Pacientes y citas
-            </span>
+            <span className="primary_color font-bold"> Pacientes y citas</span>
           </p>
           {pacientes.map((paciente) => (
+            //console.log(paciente._id)
             <Paciente key={paciente._id} paciente={paciente} />
           ))}
         </>

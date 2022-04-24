@@ -43,7 +43,7 @@ export const PacientesProvider = ({ children }) => {
     } else {
       try {
         const { data } = await clienteAxiosToken.post("/pacientes", paciente);
-        const { createdAt, updatedAt, __v, pacienteAlmacenado } = data;
+        const { createdAt, updatedAt, __v, ...pacienteAlmacenado } = data.paciente;
         setPacientes([pacienteAlmacenado, ...pacientes]);
       } catch (error) {
         console.log(error.response.data.msg);
@@ -58,7 +58,8 @@ export const PacientesProvider = ({ children }) => {
   const eliminarPaciente = async (id) => {
     try {
       const { data } = await clienteAxiosToken.delete(`/pacientes/${id}`);
-      console.log(data);
+      const pacientesActualizados = pacientes.filter((pacienteState) => pacienteState._id !== id)
+      setPacientes(pacientesActualizados)
     } catch (error) {
       console.log(error.response.data.msg);
     }
