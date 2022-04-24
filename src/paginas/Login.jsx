@@ -1,21 +1,61 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Alerta } from "../components/ui/Alerta";
+import { clienteAxios } from "../config/axios";
+import useAuth from "../hooks/useAuth";
 
 export const Login = () => {
-  const handleForm = (e) => {
+  const [alerta, setAlerta] = useState({});
+  const [login, setLogin] = useState({
+    email: "ajblanco156@gmail.com",
+    password: "Ablanco156*",
+  });
+
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const { email, password } = login;
+  const { msg } = alerta;
+
+  const handleInputs = ({ target }) => {
+    setLogin({
+      ...login,
+      [target.name]: target.value,
+    });
+  };
+
+  const handleForm = async (e) => {
     e.preventDefault();
+    if ([email, password].includes("")) {
+      setAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true,
+      });
+      return;
+    }
+
+    try {
+      // Hacemos la peticion, guardamos en el storage y redirigimos
+      const { data } = await clienteAxios.post("/veterinarios/login", login);
+      setAuth(data)
+      localStorage.setItem("token", data.token);
+      navigate("/admin");
+    } catch (error) {
+      setAlerta({ msg: error.response.data.msg, error: true });
+      return;
+    }
   };
 
   return (
     <Fragment>
       <div>
-        <h1 className="text-indigo-600 font-black text-6xl">
+        <h1 className="primary_color font-black text-6xl">
           Inicia Sesión y Administra tus
           <span className="text-black"> pacientes</span>
         </h1>
       </div>
 
       <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white">
+        {msg && <Alerta alerta={alerta} />}
         <form onSubmit={handleForm}>
           <div className="my-5">
             <label
@@ -28,6 +68,9 @@ export const Login = () => {
               type="text"
               placeholder="Email de registro"
               className="border w-full p-3 mt-3 bg-gray-50 rounded"
+              name="email"
+              value={email}
+              onChange={handleInputs}
             />
           </div>
 
@@ -39,9 +82,13 @@ export const Login = () => {
               Password
             </label>
             <input
-              type="email"
+              type="password"
               placeholder="Tu password"
               className="border w-full p-3 mt-3 bg-gray-50 rounded"
+              autoComplete="off"
+              name="password"
+              value={password}
+              onChange={handleInputs}
             />
           </div>
 

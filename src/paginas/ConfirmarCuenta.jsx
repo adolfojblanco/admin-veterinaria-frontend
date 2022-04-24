@@ -27,7 +27,7 @@ export const ConfirmarCuenta = () => {
 
   return (
     <Fragment>
-      <h1 className="text-indigo-600 font-black text-6xl">
+      <h1 className="primary_color font-black text-6xl">
         Confirma tu cuenta y comeninza a adminstrar tus pacientes
         <span className="text-black"> pacientes</span>
       </h1>

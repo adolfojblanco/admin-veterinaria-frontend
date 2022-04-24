@@ -54,7 +54,7 @@ export const Registrar = () => {
 
   return (
     <Fragment>
-      <h1 className="text-indigo-600 font-black text-6xl">
+      <h1 className="primary_color font-black text-6xl">
         Registrate y Administra tus
         <span className="text-black"> pacientes</span>
       </h1>
@@ -91,9 +91,9 @@ export const Registrar = () => {
               type="text"
               placeholder="Email de registro"
               name="email"
+              className="border w-full p-3 mt-3 bg-gray-50 rounded"
               value={email}
               onChange={handleInputs}
-              className="border w-full p-3 mt-3 bg-gray-50 rounded"
             />
           </div>
 

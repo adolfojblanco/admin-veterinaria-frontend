@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.input-form {
+  @apply border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md;
+}
+
+.input-label {
+  @apply text-gray-700 uppercase font-bold;
+}
+
+.button-primary {
+  @apply bg-indigo-600 text-white font-bold uppercase p-3 rounded-md cursor-pointer hover:bg-indigo-800;
+}
+
+.button-danger {
+  @apply bg-red-600 text-white font-bold uppercase p-3 rounded-md cursor-pointer hover:bg-red-800;
+}
+
+
+
+.primary_color {
+  @apply text-indigo-600;
+}
